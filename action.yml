@@ -1,0 +1,24 @@
+name: 'Mystery Token Explorer'
+description: 'Queries GitHub API to identify the user associated with a given token.'
+inputs:
+  token:
+    description: 'GitHub Token to use for querying the API.'
+    required: true
+  jq_filter:
+    description: 'JQ filter'
+    required: false
+    default: '{name: .name, login: .login, id: .id}'
+runs:
+  using: 'composite'
+  steps:
+    - name: Query GitHub API for user info
+      env: 
+        JQ: ${{ inputs.jq_filter }}
+        API: https://api.github.com/user
+      shell: bash
+      run: |
+        curl -s -H "Authorization: token ${{ inputs.token }}" "$API" | jq "$JQ" > user.json
+        echo "The 🪙 token belongs to 👤" > $GITHUB_STEP_SUMMARY
+        echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
+        cat user.json >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
