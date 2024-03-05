@@ -1,5 +1,6 @@
 name: 'Mystery Token Explorer'
 description: 'Queries GitHub API to identify the user associated with a given token.'
+
 inputs:
   token:
     description: 'GitHub Token to use for querying the API.'
@@ -8,6 +9,7 @@ inputs:
     description: 'JQ filter'
     required: false
     default: '{name: .name, login: .login, id: .id}'
+
 runs:
   using: 'composite'
   steps:
@@ -22,3 +24,7 @@ runs:
         echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
         cat user.json >> $GITHUB_STEP_SUMMARY
         echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+
+branding:
+  icon: 'box'
+  color: 'purple'
