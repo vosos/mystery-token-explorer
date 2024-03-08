@@ -1,6 +1,6 @@
 name: 'Mystery Token Explorer'
 description: 'Queries GitHub API to identify the user associated with a given token.'
-
+author: Viorel Petcu
 inputs:
   token:
     description: 'GitHub Token to use for querying the API.'

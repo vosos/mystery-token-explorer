@@ -1,6 +1,6 @@
 # Mystery Token Explorer
 
-This GitHub Action is your secret weapon in the ancient art of "Token Archaeology." Designed for the modern developer who finds themselves sifting through the digital ruins of projects past, this action queries the GitHub API to retrieve information about the user associated with a provided GitHub token.
+This GitHub Action is your secret weapon in the ancient art of "Token Archaeology." Designed for the modern developer who finds themselves sifting through the digital ruins of projects past.
 
 This GitHub Action can query the GitHub API and retrieve information about the user associated with a provided GitHub token. It's useful for workflows that require user identification without explicit user input.
 
@@ -8,7 +8,7 @@ This GitHub Action can query the GitHub API and retrieve information about the u
 
 ### `token`
 
-**Required** The GitHub token (the key from the repository secrets), this is used to authenticate and query the GitHub API.
+**Required** The GitHub token, this is used to authenticate and query the GitHub API.
 
 ### `jq_filter`
 
@@ -82,7 +82,7 @@ jobs:
     steps:
       - name: Retrieving info for ${{ matrix.token_name }}
         env:
-          THE_TOKEN: ${{ secrets[matrix.token_name] }}
+          THE_TOKEN: ${{ secrets[matrix.token_name] }} # token names are used as keys for the secrets map
         uses: vosos/mystery-token-explorer@v1
         with:
           token: $THE_TOKEN
